@@ -104,6 +104,7 @@
       titleVisible { label: Show Title; extend: visible; }
       buttonVisible { label: Show Button; extend: visible; }
       imageVisible { label: Show Image; extend: visible; }
+      leftImageVisible { label: Show left Image; extend: visible; }
 
       contentTheme { label: Main Style; }
       contentTheme:preview { -ko-background-color: @[backgroundColor] }
@@ -191,7 +192,7 @@
       fixedImageHeightVisible { label: Fix image height; extend: visible; }
       externalBackgroundVisible { label: Transparent background; extend: visible; }
 
-      doubleArticleBlock { label: 2 Columns Block; properties: backgroundColor titleVisible=true buttonVisible=true imageVisible=true fixedImageHeightVisible=true titleTextStyle longTextStyle buttonStyle  leftImage  leftLongText leftButtonLink rightImage  rightLongText rightButtonLink; theme: contentTheme}
+      doubleArticleBlock { label: 2 Columns Block; properties: backgroundColor titleVisible=true buttonVisible=true imageVisible=true leftImageVisible=true fixedImageHeightVisible=true titleTextStyle longTextStyle buttonStyle  leftImage  leftLongText leftButtonLink rightImage  rightLongText rightButtonLink; theme: contentTheme}
 
       tripleArticleBlock { label: 3 Columns Block; properties: backgroundColor titleVisible=true buttonVisible=true imageVisible=true fixedImageHeightVisible=true titleTextStyle longTextStyle buttonStyle  leftImage  leftLongText leftButtonLink middleImage  middleLongText middleButtonLink rightImage  rightLongText rightButtonLink; theme: contentTheme}
       
@@ -904,17 +905,26 @@
 
     <block name="doubleArticleBlock" label="2 Columns Block">
       <block-inner inner-padding="9" inner-class="vb-row">
-        <columns><repeater repeat="left,right"><!--
-            --><column-content spacing="9" width="276">
-              <linked-img if="imageVisible and fixedImageHeightVisible" editable="{{repeat}}Image" width="258" height="100" height-prop="imageHeight" padding-bottom="9"
+        <columns>
+            <column-content spacing="9" width="276">
+              <linked-img if="leftImageVisible and fixedImageHeightVisible" editable="leftImage" width="258" height="100" height-prop="imageHeight" padding-bottom="9"
                 src="https://mosaico.io/srv/f-default/img?method=placeholder&amp;params=258%2C100"></linked-img>
-              <linked-img false if="imageVisible and fixedImageHeightVisible eq false" editable="{{repeat}}Image" width="258" placeholder-height="120" padding-bottom="9"
+              <linked-img false if="leftImageVisible and fixedImageHeightVisible eq false" editable="leftImage" width="258" placeholder-height="120" padding-bottom="9"
                 src="https://mosaico.io/srv/f-default/img?method=placeholder&amp;params=258%2C120"></linked-img>
-              <text editable="{{repeat}}TitleText" if="titleVisible">Title</text>
-              <long-text editable="{{repeat}}LongText"><p>Far far away, behind the word mountains, far from the countries <a href="">Vokalia and Consonantia</a>, there live the blind texts.</p></long-text>
-              <btn editable="{{repeat}}ButtonLink" if="buttonVisible" padding-top="4">BUTTON</btn>
-            </column-content><!--
-          --></repeater></columns>
+              <text editable="leftTitleText" if="titleVisible">Title</text>
+              <long-text editable="leftLongText"><p>Far far away, behind the word mountains, far from the countries <a href="">Vokalia and Consonantia</a>, there live the blind texts.</p></long-text>
+              <btn editable="leftButtonLink" if="buttonVisible" padding-top="4">BUTTON</btn>
+            </column-content>
+            <column-content spacing="9" width="276">
+              <linked-img if="imageVisible and fixedImageHeightVisible" editable="rightImage" width="258" height="100" height-prop="imageHeight" padding-bottom="9"
+                src="https://mosaico.io/srv/f-default/img?method=placeholder&amp;params=258%2C100"></linked-img>
+              <linked-img false if="imageVisible and fixedImageHeightVisible eq false" editable="rightImage" width="258" placeholder-height="120" padding-bottom="9"
+                src="https://mosaico.io/srv/f-default/img?method=placeholder&amp;params=258%2C120"></linked-img>
+              <text editable="rightTitleText" if="titleVisible">Title</text>
+              <long-text editable="rightLongText"><p>Far far away, behind the word mountains, far from the countries <a href="">Vokalia and Consonantia</a>, there live the blind texts.</p></long-text>
+              <btn editable="rightButtonLink" if="buttonVisible" padding-top="4">BUTTON</btn>
+            </column-content>
+          </columns>
       </block-inner>
     </block>
 
